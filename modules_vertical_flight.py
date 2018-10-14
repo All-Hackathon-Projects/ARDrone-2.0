@@ -1,0 +1,42 @@
+from io import BytesIO
+import sensor_data_pb2
+
+def vertical_flight(input):
+	has_command = input['is_running']
+	meta_id = 'nothing'
+	data = 0
+
+	encodedsd = input['sensors']
+	decodedsd = sensor_data_pb2.SensorData().FromString(encodedsd)
+
+	# Change Directions If Drone Is Too High Or Too Low
+	if(decodedsd.fly == 0):
+		print("TakeOff Scheduled")
+		return {
+		    'has_command': has_command,
+		    'meta_id': 'takeoff',
+		    'data': data,
+	    }
+	else:
+		if(decodedsd.altitude < 900):
+			print("UP"),
+			print(decodedsd.altitude)
+			return {
+			    'has_command': has_command,
+			    'meta_id': 'up',
+			    'data': data,
+		    }
+		elif(decodedsd.altitude > 1500):
+			print("DOWN"),
+			print(decodedsd.altitude)
+			return {
+			    'has_command': has_command,
+			    'meta_id': 'down',
+			    'data': data,
+		    }
+		else:
+			return {
+			    'has_command': has_command,
+			    'meta_id': 'nothing',
+			    'data': data,
+		    }

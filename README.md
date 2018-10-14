@@ -61,7 +61,6 @@ pip install ardrone
 
 .navdata['demo']['foo`]
     'battery'
-    'fly'
     'altitude'
     'theta'
     'phi'
@@ -69,4 +68,7 @@ pip install ardrone
     'vx'
     'vy'
     'vz'
+
+.navdata['state']['foo']
+    'fly'
 ```

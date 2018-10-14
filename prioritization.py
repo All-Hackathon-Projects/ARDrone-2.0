@@ -17,7 +17,7 @@ def run_modules(sensors, modules, run_meta, module_state):
     has_command = result['has_command']
 
 
-    if has_command:
+    if not has_command:
       meta_id = result['meta_id']
       data = result['data']
 
@@ -33,11 +33,14 @@ def run_modules(sensors, modules, run_meta, module_state):
 
 # Run Meta
 def run_meta(meta_id, data):
-  metaCommands[meta_id](data)
+  meta_commands[meta_id](data)
 
 # Main Loop
 def main():
   state = None
-  while True:
-    time.sleep(0.5)
+  for i in range(15):
+    time.sleep(1)
     state = run_modules(parse_sensor_data.encodedata(), modules, run_meta, state)
+
+  parse_sensor_data.drone.land()
+  parse_sensor_data,drone.halt()

@@ -29,7 +29,7 @@ def encodedata():
 	# Encode Data Via Protocol Buffer
 	encodedsd = sd.SerializeToString()
 	#print(sensor_data_pb2.SensorData().FromString(encodedsd))
-	Image.frombytes('RGB', (image.width, image.height), image.image_data).show()
+	#Image.frombytes('RGB', (image.width, image.height), image.image_data).show()
 	return encodedsd
 
 drone = ardrone.ARDrone()

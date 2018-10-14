@@ -1,12 +1,15 @@
 from parse_sensor_data import drone
+from PIL import Image
 
 def disconnect(command_data):
 	drone.halt()
 
 def calibrate(command_data):
-	drone.trim()
+  drone.trim()
+
 def takeoff(command_data):
-	drone.takeoff()
+  drone.set_speed(0.5)
+  drone.takeoff()
 def hover(command_data):
 	drone.hover()
 def land(command_data):
@@ -31,9 +34,12 @@ def backward(command_data):
 def set_cam(command_data):
 	drone.set_cam(0)
 def take_pic(command_data):
+  Image.frombytes('RGB', (command_data['width'], command_data['height']), command_data['bytes']).show()
+  
+def nothing(command_data):
   pass
 
-metaCommands = {
+meta_commands = {
   'halt': disconnect,
 
   'calibrate': calibrate,
@@ -52,4 +58,6 @@ metaCommands = {
 
   'change_camera': set_cam,
   'take_pic': take_pic,
+
+  'nothing': nothing,
 }
