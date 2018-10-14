@@ -16,8 +16,7 @@ def run_modules(sensors, modules, run_meta, module_state):
     })
     has_command = result['has_command']
 
-
-    if not has_command:
+    if has_command:
       meta_id = result['meta_id']
       data = result['data']
 

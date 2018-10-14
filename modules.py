@@ -3,7 +3,7 @@ from modules_take_picture import *
 from modules_vertical_flight import *
 
 modules = [
-	vertical_flight,
 	take_picture,
-	image_recognition
+	image_recognition,
+	vertical_flight,
 ]

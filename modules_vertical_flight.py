@@ -2,7 +2,6 @@ from io import BytesIO
 import sensor_data_pb2
 
 def vertical_flight(input):
-	has_command = input['is_running']
 	meta_id = 'nothing'
 	data = 0
 
@@ -13,7 +12,7 @@ def vertical_flight(input):
 	if(decodedsd.fly == 0):
 		print("TakeOff Scheduled")
 		return {
-		    'has_command': has_command,
+		    'has_command': True,
 		    'meta_id': 'takeoff',
 		    'data': data,
 	    }
@@ -22,7 +21,7 @@ def vertical_flight(input):
 			print("UP"),
 			print(decodedsd.altitude)
 			return {
-			    'has_command': has_command,
+			    'has_command': True,
 			    'meta_id': 'up',
 			    'data': data,
 		    }
@@ -30,13 +29,13 @@ def vertical_flight(input):
 			print("DOWN"),
 			print(decodedsd.altitude)
 			return {
-			    'has_command': has_command,
+			    'has_command': True,
 			    'meta_id': 'down',
 			    'data': data,
 		    }
 		else:
 			return {
-			    'has_command': has_command,
+			    'has_command': True,
 			    'meta_id': 'nothing',
 			    'data': data,
 		    }
