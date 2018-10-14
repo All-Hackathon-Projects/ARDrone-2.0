@@ -8,10 +8,12 @@ def calibrate(command_data):
   drone.trim()
 
 def takeoff(command_data):
-  drone.set_speed(0.5)
+  speed(command_data)
   drone.takeoff()
 def hover(command_data):
 	drone.hover()
+def spin(command_data):
+  drone.move(0, 0, 0, 0.5)
 def land(command_data):
 	drone.land()
 
@@ -45,6 +47,7 @@ meta_commands = {
   'calibrate': calibrate,
   'takeoff': takeoff,
   'hover': hover,
+  'spin': spin,
   'land': land,
 
   'speed': speed,

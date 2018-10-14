@@ -101,7 +101,7 @@ def image_recognition(input):
 		else:
 			return {
 	   		    'has_command': True,  
-	        	'meta_id': 'hover',
+	        	'meta_id': 'spin',
 	    		'data': data,
 	    	}
     else:
