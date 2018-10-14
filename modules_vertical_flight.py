@@ -2,8 +2,7 @@ from io import BytesIO
 import sensor_data_pb2
 
 def vertical_flight(input):
-	meta_id = 'nothing'
-	data = 0
+	data = ''
 
 	encodedsd = input['sensors']
 	decodedsd = sensor_data_pb2.SensorData().FromString(encodedsd)
