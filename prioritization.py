@@ -37,7 +37,7 @@ def run_meta(meta_id, data):
 # Main Loop
 def main():
   state = None
-  for i in range(15):
+  for i in range(30):
     time.sleep(1)
     state = run_modules(parse_sensor_data.encodedata(), modules, run_meta, state)
 

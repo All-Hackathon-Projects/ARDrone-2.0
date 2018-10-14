@@ -7,15 +7,17 @@ import time
 import cv2,numpy
 import parse_sensor_data 
 import ardrone
-
+import sensor_data_pb2
 from PIL import Image
+
+min_confidence = 0.25
 
 def vision(img):
 	# List Storage For Labels
 	list_=[]
 
 	# Min Confidence Level For Detections
-	min_confidence = 0.25
+	global min_confidence
 	
 	# Initialize The List Of Class Labels MobileNet SSD Was Trained To Detect & Generate Bounding Box Color For Each Class
 	CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
@@ -78,7 +80,8 @@ def image_recognition(input):
 	print("Valid Objects: ", valid_objects)
 
 	# Search For Desired Object
-	if "bottle" in list:
+	if("bottle" in valid_objects):
+		print("Bottle")
 		if decodedsd.fly == 0:
 			return {
 	   		    'has_command': True,  
@@ -91,20 +94,21 @@ def image_recognition(input):
 	        	'meta_id': 'hover',
 	    		'data': data,
 	    	}
-    elif "person" in list:
-    	if decodedsd.fly == 0:
+	elif("person" in valid_objects):
+		print("Person")
+		if decodedsd.fly == 0:
 			return {
-	   		    'has_command': True,  
-	        	'meta_id': 'takeoff',
-	    		'data': data,
-	    	}
+				'has_command': True,  
+				'meta_id': 'takeoff',
+				'data': data,
+			}
 		else:
 			return {
-	   		    'has_command': True,  
-	        	'meta_id': 'spin',
-	    		'data': data,
-	    	}
-    else:
-    	return {
-    		'has_command': False,
-    	}
+				'has_command': True,  
+				'meta_id': 'spin',
+				'data': data,
+			}
+	else:
+		return {
+			'has_command': False,
+		}

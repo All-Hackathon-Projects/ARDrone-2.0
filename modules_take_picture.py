@@ -8,6 +8,10 @@ def take_picture(input):
 	meta_id = 'take_pic'
 	data = ''
 
+	# Global Variables
+	global next_time
+	global interval
+
 	# If Timer
 	cur_time = time.time()
 	if cur_time > next_time:
@@ -18,21 +22,21 @@ def take_picture(input):
 		#Image.frombytes('RGB', (decodedsd.images[0].width, decodedsd.images[0].height), decodedsd.images[0].image_data).show()
 		print("Picture Scheduled")
 		data = {
-	        'width': decodedsd.images[0].width 
-	      	'height': decodedsd.images[0].height
-	      	'bytes': decodedsd.images[0].image_data
-	    }
+			'width': decodedsd.images[0].width,
+			'height': decodedsd.images[0].height,
+			'bytes': decodedsd.images[0].image_data,
+		}
 
-	    # Update next_time
-	    next_time = cur_time + interval
+		# Update next_time
+		next_time = cur_time + interval
 
 		return {
-	        'has_command': True,  
-	        'meta_id': meta_id,
-	        'data': data,
-	    }
+			'has_command': True,  
+			'meta_id': meta_id,
+			'data': data,
+		}
 	# Else
 	else:
 		return {
-		    'has_command': False,
+			'has_command': False,
 		}
